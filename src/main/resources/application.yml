@@ -1,0 +1,8 @@
+server:
+  port: 8886
+  tomcat:
+    max-threads: 1000
+    max-connections: 1000
+spring:
+  profiles:
+    active: dev

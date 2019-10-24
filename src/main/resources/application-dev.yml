@@ -1,0 +1,57 @@
+logging:
+  config: classpath:logback-dev.xml
+  file: classpath:logback-dev.xml
+  level:
+    root: info
+  path: logs
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.1.196:3306/?useOldAliasMetadataBehavior=true&useSSL=false
+    username: mjoys_test
+    password: 123456
+    druid:
+      initial-size: 1                     #连接池初始大小
+      max-active: 20                      #连接池中最大的活跃连接数
+      min-idle: 1                         #连接池中最小的活跃连接数
+      max-wait: 60000                     #配置获取连接等待超时的时间
+      pool-prepared-statements: true    #打开PSCache，并且指定每个连接上PSCache的大小
+      max-pool-prepared-statement-per-connection-size: 20
+      validation-query: SELECT 1 FROM DUAL
+      validation-query-timeout: 30000
+      test-on-borrow: false             #是否在获得连接后检测其可用性
+      test-on-return: false             #是否在连接放回连接池后检测其可用性
+      test-while-idle: true             #是否在连接空闲一段时间后检测其可用性
+  redis:
+    database: 1
+    host: localhost
+    port: 6379
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+#mybatis配置
+mybatis:
+  type-aliases-package: com.mjoys.entity
+  #config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+# pagehelper配置
+pagehelper:
+  helperDialect: mysql
+  #分页合理化，pageNum<=0则查询第一页的记录；` pageNum大于总页数，则查询最后一页的记录
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+# AES密码加密私钥(Base64)
+encryptAESKey: V2FuZzkyNuYSKIuwqTQkFQSUpXVA
+# JWT认证加密私钥(Base64)
+encryptJWTKey: U0JBUElOENhspJrzkyNjQ1NA
+# AccessToken过期时间-5分钟-5*60(秒为单位)
+accessTokenExpireTime: 300
+# RefreshToken过期时间-30分钟-30*60(秒为单位)
+refreshTokenExpireTime: 1800
+# Shiro缓存过期时间-5分钟-5*60(秒为单位)(一般设置与AccessToken过期时间一致)
+shiroCacheExpireTime: 300
+## 其它参数配置 - end

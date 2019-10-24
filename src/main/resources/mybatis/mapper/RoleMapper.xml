@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mjoys.mapper.RoleMapper">
+
+    <resultMap id="typeRole" type="com.mjoys.entity.Role">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="roleName" column="role_name"/>
+    </resultMap>
+
+    <select id="findRoleByUserId" resultMap="typeRole">
+        SELECT
+            t2.id,t1.user_id,t2.role_name
+        FROM
+            moa.t_user_role t1,moa.t_role t2
+        WHERE t1.role_id = t2.id
+        AND t1.user_id=#{userId}
+    </select>
+</mapper>
